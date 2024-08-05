@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Elections</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
+
+    <link rel="stylesheet" href="css/scrolly-styles.css">
+    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+
+<style>
+  .body {
+        text-rendering: optimizeLegibility;
+        font-size: 20px;
+    }
+    .header {
+        height: 100vh;
+        width: 100%;
+        padding: 0;
+    }
+
+    .with-image-bg,
+    .with-video-bg {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+    .with-image-bg {
+            background-image: url("assets/cover.png");
+    }
+
+    .video-background {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%; 
+        }
+
+    .video-background video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+    .header-text {
+        /* background-color: lightcoral; */
+        width: 40%;
+        margin: 0 auto;
+        position: relative;
+        top: 60%;
+        font-size: 20px;
+    }
+
+    .header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3em;
+        padding-bottom: 10px;
+        text-align: center;
+        color: white;
+        text-shadow: 1px 1px 2px black;
+    }
+
+    .header h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1em;
+        text-align: center;
+        padding-bottom: 10px;
+        color: white;
+        text-shadow: 1px 1px 2px black;
+        line-height: 1.3em;
+    }
+
+    .header .byline {
+        /* background-color: beige; */
+        padding: 10px;
+        line-height: 1em;
+       
+    }
+
+    .header .byline p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.8em;
+        color: white;
+        text-shadow: 1px 1px 2px black;
+        
+
+    }
+
+    .content {
+        width: 630px;
+        margin: 0 auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+    .content p {
+        margin-bottom: 20px;
+        line-height: 1.3em;
+        font-size: 20px;
+    }
+
+    .figure {
+        background-color: green;
+        width: 720px;
+        height: 480px;
+        padding-bottom: 40px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .figure img {
+        width: 100%; 
+        height: 100%;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+
+    .figure p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.5em;
+        margin-bottom: 0px;
+        opacity: 0.8;
+    }
+
+    .figure span {
+        font-size: 1em;
+        font-family: 'Open Sans', sans-serif;
+
+    }
+
+    .footer {
+        background-color: lightblue;
+        height: 100px;
+        text-align: center;
+    }
+
+    .footer p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.8em;
+        padding-top: 50px;
+    }  
+</style>
+</head>
+
+<body>
+
+<!-- scrolly harris-videos -->
+
+    <section id="scrolly-videos" class="scrolly-container">
+        <div class="sticky-thing">
+          <video src="assets/harris-videos/harris-1.mp4" alt="Cover image" loop muted>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="steps-container">
+          <div class="step" id="step1">
+            <div>
+              <p>It only took hours after President Joe Biden dropped out of the race for videos of his successor and Vice President Kamala to show up on TikTok.</p>
+            </div>
+          </div>
+          <div class="step" id="step2">
+            <p>In one of many videos, Harris can be heard rambling.</p>
+          </div>
+          <div class="step" id="step3">
+            <p>More altered videos of Harris started showing up with the hashtag #wordsaladswithkamala.</p>
+          </div>
+          <div class="step" id="step4">
+            <p>By the time TikTok took them down, the videos had been viewed thousands of times.</p>
+          </div>
+        </div>
+    </section>
+
+<!-- title graphic -->
+<div class="header">
+    <div class="header with-image-bg">
+        <div class="header-text">
+            <h1>Election Deepfakes</h1>
+            <h3>AI-Generated Elections Content Slipping Through the Cracks of TikTok’s Labeling Initiative</h3>
+                <div class="byline">
+                    <p>By Katrina Ventura</p>
+                    <p>August 14, 2024</p>
+                </div>
+        </div>
+    </div>
+</div>
+
+    <div class="content">
+        <p>This is one of many ways AI technology has been used to spread misinformation about the 2024 elections. Presidents Joe Biden and Donald Trump - and now Harris - have been the subject of many AI-generated TikTok viral moments which could easily shift from harmless tomfoolery to outright election threats.</p>
+
+        <p>The extent of how much this is happening changes day to day in the ever-morphing world of social media but a snapshot of the multiple types of AI-generated election TikToks emerged in an analysis by Columbia University Graduate School of Journalism.</p>  
+        
+        <p>An analysis of around 600 TikToks that contain the hashtags AIBiden or AITrump showed that 37% were gaming memes, 36% were deepfakes, and 18% were song covers.</p>
+    </div>
+    
+<!-- bubble.js -->
+<section id="scrolly-bubbles">
+    <div class="sticky-thing">
+        <div id="graphic"></div>
+    </div>
+    <div class="steps-container">
+        <div class ="step" data-step="0" id="step1">
+            <p>Over 500 TikToks had the hashtags #AIBiden or #AITrump.</p>
+        </div>
+        <div class="step" data-step="1">
+            <p>217 TikToks showed parodies of Biden and Trump playing video games.</p>
+        </div>
+        <div class="step" data-step="2">
+            <p>While 231 TikToks were digitally altered images or videos, also known as deepfakes.</p>
+        </div>
+        <div class="step" data-step="3">
+            <p>And 119 TikToks used the AI-generated voices of Biden and Trump singing for various song covers.</p>
+        </div>
+        <div class="step" data-step="4" id="step4">
+            <p>The rest were either TikTokers commenting on the AI-generated content or random videos using the hashtags.</p>
+        </div>
+    </div>
+</section>
+
+    <div class="content">
+        <p>Judy Muller,  a retired professor from the USC Annenberg School of Journalism, said while the videos appear to be primitive fakes, AI is already so much ahead that the public will have to be trained to look for legitimate news sources.</p>
+
+        <p>“I think the horse has left the barn,” said Muller. “These are some of the most primitive fakes that I've seen and honestly they're better already.”</p>
+
+        <p>In one deepfake TIkTok of Biden posted by the account Mrs. Fozz, the president is seen at his oval office doing a public service announcement. He tells the public that he had Trump arrested and taken to a secret prison.</p>
+
+
+
+        <p>TikTok, which has been the subject of Congressional hearings and is under pressure to divest itself from its Chinese parent company ByteDance, has charged forward with efforts to flag fake AI-generated content.</p>
+
+        <p>Maurice Turner, a public interest technologist and cybersecurity expert on TikTok’s Global Public Policy Team, said over 98% of election related deceptive content is taken down by the system even before it gets flagged.</p>
+
+        <p>“We do things like have machine-based processes as well as human-based processes for detecting and being able to evaluate content that we suspect might be deceptive,” said Turner.</p>
+
+        <p>TikTok took down deepfake videos of Harris sounding incoherent soon after it went viral on the platform. But more deepfakes of Harris continued to show up in X, and TikTok. One of them was a parody ad reposted by X owner Elon Musk which features an AI voiceover of Harris calling herself the “ultimate diversity hire.”</p>
+
+        <p>Despite efforts to properly label AI-generated content, only 12% of the TikToks in the analysis had the "Made with AI" label.<p> 
+
+        <p>Calls to regulate the use of the use of artificial intelligence in social media platforms have strengthened in Congress. Federal regulators began their crackdown on deepfake technology impersonating politicians after a robocall of Biden told democrats not to participate in the primary election in New Hampshire.</p>
+
+        <p>Unlike in previous elections, the growing scope of misinformation stands out in 2024 as never before, as millions of social media users have the opportunity to pass manipulated content around the digital world at the click of a mouse.
+        </p>
+
+    </div>
+
+    <div class="figure">
+        <img src="https://via.placeholder.com/400" alt="Placeholder Image">
+        <p>Image Source</p>
+        <span>Image Caption</span>
+    </div>
+
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptates atque doloribus nihil officiis similique excepturi, ad sunt, esse sint iste magni nesciunt ipsam deleniti id dolor obcaecati doloremque nostrum?</p>
+
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptates atque doloribus nihil officiis similique excepturi, ad sunt, esse sint iste magni nesciunt ipsam deleniti id dolor obcaecati doloremque nostrum?</p>    
+    </div>
+    
+
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptates atque doloribus nihil officiis similique excepturi, ad sunt, esse sint iste magni nesciunt ipsam deleniti id dolor obcaecati doloremque nostrum?</p>
+    
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat adipisci eum harum cumque rem recusandae consectetur! Tempora aperiam debitis, labore odio inventore iste quos harum aliquid et doloribus impedit doloremque!</p>
+
+    </div>
+
+    <div class="footer">
+        <p>Footer</p>
+    </div>
+
+
+<script>
+    /* // video scrolly */
+    (() => {
+    const scroller = scrollama()
+    let currentAudio = null;
+    
+    scroller
+    .setup({
+    parent: document.querySelector("#scrolly-videos"),
+    step: ".step",
+    offset: 0.8,
+    debug: false,
+    })
+    .onStepEnter(function ({ element, index, direction }) {
+    const event = new CustomEvent("stepin", { detail: { direction: direction } })
+    element.dispatchEvent(event)
+    
+    // Play the video when entering the step
+    const video = element.querySelector('video')
+    if (video) {
+        video.play()
+    }
+    })
+    .onStepExit(function ({ element, index, direction }) {
+    const event = new CustomEvent("stepout", { detail: { direction: direction } })
+    element.dispatchEvent(event)
+    
+    // Pause the video when exiting the step
+    const video = element.querySelector('video')
+    if (video) {
+        video.pause()
+    }
+
+    // Stop audio if it's playing
+    if (currentAudio) {
+            currentAudio.pause()
+            currentAudio.currentTime = 0
+            currentAudio = null
+        }
+    
+    if (direction === "up" && element.previousElementSibling) {
+        const prevEvent = new CustomEvent("stepin", { detail: { direction: direction } })
+        element.previousElementSibling.dispatchEvent(prevEvent)
+        
+        // Play the video of the previous step when scrolling up
+        const prevVideo = element.previousElementSibling.querySelector('video')
+        if (prevVideo) {
+        prevVideo.play()
+        }
+    }
+    })
+    
+    window.addEventListener("resize", scroller.resize)
+    })()
+    
+    d3.select("#step1").on('stepin', (e) => {
+      const container = d3.select(e.target.closest(".scrolly-container"));
+      container.select("img").attr("src", "assets/harris-videos/harris-1.mp4").style("display", "block");
+      container.select("video").style("display", "none");
+    })
+
+    d3.select("#step2").on('stepin', (e) => {
+        const container = d3.select(e.target.closest(".scrolly-container"));
+        container.select("img").style("display", "none");
+        const video = container.select("video")
+            .attr("src", "assets/harris-videos/harris-1.mp4")
+            .style("display", "block");
+        video.node().play();
+
+        // Add and play audio
+        let audio = container.select("audio");
+        if (audio.empty()) {
+            audio = container.append("audio").attr("src", "assets/harris-videos/harris.mp3");
+        } else {
+            audio.attr("src", "assets/harris.mp3");
+        }
+        currentAudio = audio.node();
+        currentAudio.play().catch(e => console.error("Error playing audio:", e));
+    })
+    
+    d3.select("#step3").on('stepin', (e) => {
+      const container = d3.select(e.target.closest(".scrolly-container"));
+      container.select("img").style("display", "none");
+      const video = container.select("video")
+        .attr("src", "assets/harris-videos/harris-2.mp4")
+        .style("display", "block");
+      video.node().play();
+    })
+    
+    d3.select("#step4").on('stepin', (e) => {
+      const container = d3.select(e.target.closest(".scrolly-container"));
+    })
+
+</script>
+
+
+<script>
+    // Load the dataset
+    d3.csv('data-viz.csv').then(loadData);
+    
+    // Define the width and height of the SVG
+    var width = 900;
+    var height = 900;
+    
+    // Define the size of the rectangles
+    var rectWidth = 27;
+    var rectHeight = 48;
+    
+    // Create the force simulation
+    var simulation = d3.forceSimulation();
+    
+    // Create the SVG
+    var svg = d3.select('#graphic')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g');
+    console.log("SVG created:", svg.node());
+    
+    // Load the data
+    function loadData(data) {
+        console.log(data);
+    
+        // Create the defs for patterns
+        var defs = svg.append('defs');
+    
+        function updatePatterns(filteredData) {
+            defs.selectAll(".video-image")
+                .data(filteredData, d => d.id)
+                .join(
+                    enter => enter.append("pattern")
+                        .attr("class", "video-image")
+                        .attr('id', d => d.id)
+                        .attr('height', '100%')
+                        .attr('width', '100%')
+                        .attr('patternContentUnits', 'objectBoundingBox')
+                        .append('image')
+                        .attr('href', 'tiktok.png')
+                        .attr('width', 1)
+                        .attr('height', 1)
+                        .attr('preserveAspectRatio', 'none'),
+                    update => update,
+                    exit => exit.remove()
+                );
+        }
+    
+        function updateRectangles(filteredData) {
+            console.log("Updating rectangles with data:", filteredData);
+            return svg.selectAll(".bubble")
+                .data(filteredData, d => d.id)
+                .join(
+                    enter => {
+                        console.log("Entering new elements:", enter.size());
+                        return enter.append("rect")
+                                    .attr('class', 'bubble')
+                                    .attr('width', rectWidth)
+                                    .attr('height', rectHeight)
+                                    .attr('fill', d => `url(#${d.id})`)
+                                    .attr('opacity', 0)
+                                    .attr('x', d => Math.random() * width) // Random initial x position
+                                    .attr('y', d => Math.random() * height); // Random initial y position
+                
+                    },
+                    update => {
+                        console.log("Updating elements:", update.size());
+                        return update;
+                    }
+                );
+        }
+    
+    // Adjust these values to control the compactness of the bubble
+    var centerStrength = 0.1;  // Reduced to allow for smoother expansion
+    var collideStrength = 0.025; // Increased to maintain separation between elements
+    
+    // Set up forces
+    simulation
+        .force('x', d3.forceX(width / 2).strength(centerStrength))
+        .force('y', d3.forceY(height / 2).strength(centerStrength))
+        .force('collide', d3.forceCollide().radius(() => Math.sqrt((rectWidth/2)**2 + (rectHeight/2)**2) + 1).strength(collideStrength));
+    
+    function updateVisualization(filteredData) {
+        updatePatterns(filteredData);
+        const rects = updateRectangles(filteredData);
+    
+         // Initialize positions for new nodes
+         filteredData.forEach(d => {
+            if (d.x === undefined || d.y === undefined) {
+                d.x = Math.random() * width;
+                d.y = Math.random() * height;
+            }
+        });
+    
+        // Gradually increase the center force strength
+        let currentCenterStrength = 0.01;
+        const targetCenterStrength = 0.1;
+        const strengthIncrement = (targetCenterStrength - currentCenterStrength) / 30; // 60 fps for 1 second
+    
+        // Update existing rectangles
+        rects.attr('x', d => d.x)
+             .attr('y', d => d.y);
+    
+        // Transition for new rectangles
+        rects.transition()
+            .duration(500)
+            .attr('opacity', 0.7)
+    
+        // Adjust the simulation to accommodate the growing bubble
+        simulation.nodes(filteredData)
+            .force('collide', d3.forceCollide().radius(() => Math.sqrt((rectWidth/2)**2 + (rectHeight/2)**2) + 1).strength(collideStrength))
+            .force('center', d3.forceCenter(width / 2, height / 2).strength(currentCenterStrength))
+            .alpha(1)
+            .restart();
+    
+        // Gradually adjust the center force and cool down the simulation
+        let timer = d3.timer((elapsed) => {
+            currentCenterStrength = Math.min(currentCenterStrength + strengthIncrement, targetCenterStrength);
+            simulation.force('center').strength(currentCenterStrength);
+            
+            if (elapsed > 1000) { // Stop after 1 second
+                timer.stop();
+                simulation.alpha(0.1).alphaDecay(0.02); // Cool down simulation
+            }
+        });
+    
+        simulation.on('tick', ticked);
+    }
+    
+    function ticked() {
+        svg.selectAll(".bubble")
+            .attr('x', d => Math.max(0, Math.min(width - rectWidth, d.x - rectWidth / 2)))
+            .attr('y', d => Math.max(0, Math.min(height - rectHeight, d.y - rectHeight / 2)));
+    }
+    
+        // Initialize with empty data
+        let allData = []; // Store all data
+    
+        // Set up Scrollama
+        const scroller = scrollama();
+    
+        scroller
+            .setup({
+                step: '.step',
+                offset: 0.5,
+                debug: false
+            })
+            .onStepEnter(response => {
+                console.log("Step entered:", response.index, response.direction);
+                const step = response.element.dataset.step;
+    
+                if (step === "0") {
+                allData = [];
+            } else if (step === "1") {
+                allData = data.filter(d => d.gamer.toUpperCase() === 'TRUE');
+            } else if (step === "2") {
+                allData = data.filter(d => d.gamer.toUpperCase() === 'TRUE' || d.deepfakes.toUpperCase() === 'TRUE');
+            } else if (step === "3") {
+                allData = data.filter(d => d.gamer.toUpperCase() === 'TRUE' || d.deepfakes.toUpperCase() === 'TRUE' || d.songs.toUpperCase() === 'TRUE');
+            } else if (step === "4") {
+                allData = [];
+            }
+            
+                
+                console.log("Filtered data:", allData.length, "elements");
+
+                updateVisualization(allData);
+            });
+    
+        // Setup resize event
+        window.addEventListener('resize', scroller.resize);
+    } 
+    </script>
+</body>
+</html>

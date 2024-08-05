@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Scrolly</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
+    <link rel="stylesheet" href="css/scrolly-styles.css">
+</head>
+<body>
+    <section id="scrolly-bubbles">
+        <div class="sticky-thing">
+            <div id="graphic"></div>
+        </div>
+        <div class="steps-container">
+            <div class ="step" data-step="0" id="step1">
+                <p>Over 500 TikToks were analyzed.</p>
+            </div>
+            <div class="step" data-step="1">
+                <p>217 are memes.</p>
+            </div>
+            <div class="step" data-step="2">
+                <p>231 are deepfakes.</p>
+            </div>
+            <div class="step" data-step="3">
+                <p>119 are song covers.</p>
+            </div>
+            <div class="step" data-step="4" id="step4">
+                <p>The rest are random TikToks.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Load the dataset
+        d3.csv('data-viz.csv').then(loadData);
+        
+        // Define the width and height of the SVG
+        var width = 900;
+        var height = 900;
+        
+        // Define the size of the rectangles
+        var rectWidth = 27;
+        var rectHeight = 48;
+        
+        // Create the force simulation
+        var simulation = d3.forceSimulation();
+        
+        // Create the SVG
+        var svg = d3.select('#graphic')
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .append('g');
+        console.log("SVG created:", svg.node());
+        
+        // Load the data
+        function loadData(data) {
+            console.log(data);
+        
+            // Create the defs for patterns
+            var defs = svg.append('defs');
+        
+            function updatePatterns(filteredData) {
+                defs.selectAll(".video-image")
+                    .data(filteredData, d => d.id)
+                    .join(
+                        enter => enter.append("pattern")
+                            .attr("class", "video-image")
+                            .attr('id', d => d.id)
+                            .attr('height', '100%')
+                            .attr('width', '100%')
+                            .attr('patternContentUnits', 'objectBoundingBox')
+                            .append('image')
+                            .attr('href', 'tiktok.png')
+                            .attr('width', 1)
+                            .attr('height', 1)
+                            .attr('preserveAspectRatio', 'none'),
+                        update => update,
+                        exit => exit.remove()
+                    );
+            }
+        
+            function updateRectangles(filteredData) {
+                console.log("Updating rectangles with data:", filteredData);
+                return svg.selectAll(".bubble")
+                    .data(filteredData, d => d.id)
+                    .join(
+                        enter => {
+                            console.log("Entering new elements:", enter.size());
+                            return enter.append("rect")
+                                        .attr('class', 'bubble')
+                                        .attr('width', rectWidth)
+                                        .attr('height', rectHeight)
+                                        .attr('fill', d => `url(#${d.id})`)
+                                        .attr('opacity', 0)
+                                        .attr('x', d => Math.random() * width) // Random initial x position
+                                        .attr('y', d => Math.random() * height); // Random initial y position
+                    
+                        },
+                        update => {
+                            console.log("Updating elements:", update.size());
+                            return update;
+                        }
+                    );
+            }
+        
+        // Adjust these values to control the compactness of the bubble
+        var centerStrength = 0.1;  // Reduced to allow for smoother expansion
+        var collideStrength = 0.025; // Increased to maintain separation between elements
+        
+        // Set up forces
+        simulation
+            .force('x', d3.forceX(width / 2).strength(centerStrength))
+            .force('y', d3.forceY(height / 2).strength(centerStrength))
+            .force('collide', d3.forceCollide().radius(() => Math.sqrt((rectWidth/2)**2 + (rectHeight/2)**2) + 1).strength(collideStrength));
+        
+        function updateVisualization(filteredData) {
+            updatePatterns(filteredData);
+            const rects = updateRectangles(filteredData);
+        
+             // Initialize positions for new nodes
+             filteredData.forEach(d => {
+                if (d.x === undefined || d.y === undefined) {
+                    d.x = Math.random() * width;
+                    d.y = Math.random() * height;
+                }
+            });
+        
+            // Gradually increase the center force strength
+            let currentCenterStrength = 0.01;
+            const targetCenterStrength = 0.1;
+            const strengthIncrement = (targetCenterStrength - currentCenterStrength) / 30; // 60 fps for 1 second
+        
+            // Update existing rectangles
+            rects.attr('x', d => d.x)
+                 .attr('y', d => d.y);
+        
+            // Transition for new rectangles
+            rects.transition()
+                .duration(500)
+                .attr('opacity', 0.7)
+        
+            // Adjust the simulation to accommodate the growing bubble
+            simulation.nodes(filteredData)
+                .force('collide', d3.forceCollide().radius(() => Math.sqrt((rectWidth/2)**2 + (rectHeight/2)**2) + 1).strength(collideStrength))
+                .force('center', d3.forceCenter(width / 2, height / 2).strength(currentCenterStrength))
+                .alpha(1)
+                .restart();
+        
+            // Gradually adjust the center force and cool down the simulation
+            let timer = d3.timer((elapsed) => {
+                currentCenterStrength = Math.min(currentCenterStrength + strengthIncrement, targetCenterStrength);
+                simulation.force('center').strength(currentCenterStrength);
+                
+                if (elapsed > 1000) { // Stop after 1 second
+                    timer.stop();
+                    simulation.alpha(0.1).alphaDecay(0.02); // Cool down simulation
+                }
+            });
+        
+            simulation.on('tick', ticked);
+        }
+        
+        function ticked() {
+            svg.selectAll(".bubble")
+                .attr('x', d => Math.max(0, Math.min(width - rectWidth, d.x - rectWidth / 2)))
+                .attr('y', d => Math.max(0, Math.min(height - rectHeight, d.y - rectHeight / 2)));
+        }
+        
+            // Initialize with empty data
+            let allData = []; // Store all data
+        
+            // Set up Scrollama
+            const scroller = scrollama();
+        
+            scroller
+                .setup({
+                    step: '.step',
+                    offset: 0.5,
+                    debug: false
+                })
+                .onStepEnter(response => {
+                    console.log("Step entered:", response.index, response.direction);
+                    const step = response.element.dataset.step;
+        
+                    if (step === "0") {
+                    allData = [];
+                } else if (step === "1") {
+                    allData = data.filter(d => d.gamer.toUpperCase() === 'TRUE');
+                } else if (step === "2") {
+                    allData = data.filter(d => d.gamer.toUpperCase() === 'TRUE' || d.deepfakes.toUpperCase() === 'TRUE');
+                } else if (step === "3") {
+                    allData = data.filter(d => d.gamer.toUpperCase() === 'TRUE' || d.deepfakes.toUpperCase() === 'TRUE' || d.songs.toUpperCase() === 'TRUE');
+                } else if (step === "4") {
+                    allData = [];
+                }
+                
+                    
+                    console.log("Filtered data:", allData.length, "elements");
+    
+                    updateVisualization(allData);
+                });
+        
+            // Setup resize event
+            window.addEventListener('resize', scroller.resize);
+        } 
+</script>
+
+</body>
+</html>

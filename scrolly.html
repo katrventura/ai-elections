@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Scrolly</title>
+  
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
+
+  <link rel="stylesheet" href="css/scrolly-styles.css">
+</head>
+
+<body>
+
+  <section id="scrolly-videos" class="scrolly-container">
+    <div class="sticky-thing">
+      <video src="assets/harris-videos/harris-1.mp4" alt="Cover image" loop muted>
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="steps-container">
+      <div class="step" id="step1">
+        <div>
+          <p>It only took hours after President Joe Biden dropped out of the race for videos of his successor and Vice President Kamala to show up on TikTok.</p>
+        </div>
+      </div>
+      <div class="step" id="step2">
+        <p>In one of many videos, Harris can be heard rambling.</p>
+      </div>
+      <div class="step" id="step3">
+        <p>More altered videos of Harris started showing up with the hashtag #wordsaladswithkamala.</p>
+      </div>
+      <div class="step" id="step4">
+        <p>By the time TikTok took them down, the videos had been viewed thousands of times.</p>
+      </div>
+    </div>
+</section>
+
+<script>
+  /* // video scrolly */
+  (() => {
+  const scroller = scrollama()
+  let currentAudio = null;
+  
+  scroller
+  .setup({
+  parent: document.querySelector("#scrolly-videos"),
+  step: ".step",
+  offset: 0.8,
+  debug: false,
+  })
+  .onStepEnter(function ({ element, index, direction }) {
+  const event = new CustomEvent("stepin", { detail: { direction: direction } })
+  element.dispatchEvent(event)
+  
+  // Play the video when entering the step
+  const video = element.querySelector('video')
+  if (video) {
+      video.play()
+  }
+  })
+  .onStepExit(function ({ element, index, direction }) {
+  const event = new CustomEvent("stepout", { detail: { direction: direction } })
+  element.dispatchEvent(event)
+  
+  // Pause the video when exiting the step
+  const video = element.querySelector('video')
+  if (video) {
+      video.pause()
+  }
+
+  // Stop audio if it's playing
+  if (currentAudio) {
+          currentAudio.pause()
+          currentAudio.currentTime = 0
+          currentAudio = null
+      }
+  
+  if (direction === "up" && element.previousElementSibling) {
+      const prevEvent = new CustomEvent("stepin", { detail: { direction: direction } })
+      element.previousElementSibling.dispatchEvent(prevEvent)
+      
+      // Play the video of the previous step when scrolling up
+      const prevVideo = element.previousElementSibling.querySelector('video')
+      if (prevVideo) {
+      prevVideo.play()
+      }
+  }
+  })
+  
+  window.addEventListener("resize", scroller.resize)
+  })()
+  
+  d3.select("#step1").on('stepin', (e) => {
+    const container = d3.select(e.target.closest(".scrolly-container"));
+    container.select("img").attr("src", "assets/harris-videos/harris-1.mp4").style("display", "block");
+    container.select("video").style("display", "none");
+  })
+
+  d3.select("#step2").on('stepin', (e) => {
+      const container = d3.select(e.target.closest(".scrolly-container"));
+      container.select("img").style("display", "none");
+      const video = container.select("video")
+          .attr("src", "assets/harris-videos/harris-1.mp4")
+          .style("display", "block");
+      video.node().play();
+
+      // Add and play audio
+      let audio = container.select("audio");
+      if (audio.empty()) {
+          audio = container.append("audio").attr("src", "assets/harris-videos/harris.mp3");
+      } else {
+          audio.attr("src", "assets/harris.mp3");
+      }
+      currentAudio = audio.node();
+      currentAudio.play().catch(e => console.error("Error playing audio:", e));
+  })
+  
+  d3.select("#step3").on('stepin', (e) => {
+    const container = d3.select(e.target.closest(".scrolly-container"));
+    container.select("img").style("display", "none");
+    const video = container.select("video")
+      .attr("src", "assets/harris-videos/harris-2.mp4")
+      .style("display", "block");
+    video.node().play();
+  })
+  
+  d3.select("#step4").on('stepin', (e) => {
+    const container = d3.select(e.target.closest(".scrolly-container"));
+  })
+
+</script>
+
+</body>
+</html>
