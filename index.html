@@ -110,33 +110,98 @@
         font-size: 20px;
     }
 
+    /* figure */
     .figure {
-        background-color: green;
-        width: 720px;
-        height: 480px;
-        padding-bottom: 40px;
-        margin: 0 auto;
-        position: relative;
+    background-color: lightgrey;
+    width: 600px;
+    margin: 0 auto;
+    position: relative;
+    }
+
+    .figure video {
+        width: 100%;
+        display: block;
+    }
+
+    .figure .image-container {
+    width: 100%;
+    background-color: white;
     }
 
     .figure img {
-        width: 100%; 
-        height: 100%;
-        object-fit: cover;
-        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .figure figcaption {
+        padding: 10px;
     }
 
     .figure p {
         font-family: 'Open Sans', sans-serif;
-        font-size: 0.5em;
-        margin-bottom: 0px;
+        font-size: 0.75em;
+        margin: 0 0 5px 0;
         opacity: 0.8;
     }
 
     .figure span {
         font-size: 1em;
         font-family: 'Open Sans', sans-serif;
+        display: block;
+    }
 
+    /* play videos */
+    .video-container {
+    position: relative;
+    width: 100%;
+    }
+
+    .custom-video {
+    width: 100%;
+    display: block;
+}
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        padding: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .play-button:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* blockquote */
+    .quote {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-left: 5px solid #ccc;
+    padding: 15px 20px;
+    }
+
+    .quote blockquote {
+        margin: 0;
+    }
+
+    .quote p {
+        margin: 10px 0;
+        line-height: 1.4;
+    }
+
+    .quote figcaption {
+        margin-top: 10px;
+        font-style: italic;
+        color: #666;
     }
 
     .footer {
@@ -229,13 +294,17 @@
 </section>
 
     <div class="content">
-        <p>Judy Muller,  a retired professor from the USC Annenberg School of Journalism, said while the videos appear to be primitive fakes, AI is already so much ahead that the public will have to be trained to look for legitimate news sources.</p>
+        <p>Unlike in previous elections, the growing scope of misinformation stands out in 2024 as never before, as millions of social media users have the opportunity to pass manipulated content around the digital world at the click of a mouse.
+        </p>
+
+        <p>Judy Muller,  a retired professor from the USC Annenberg School of Journalism, said while the videos appear to be primitive fakes, AI is already so much ahead that efforts to combat the spread of disinformation might be too little too late.</p>
 
         <p>“I think the horse has left the barn,” said Muller. “These are some of the most primitive fakes that I've seen and honestly they're better already.”</p>
 
-        <p>In one deepfake TIkTok of Biden posted by the account Mrs. Fozz, the president is seen at his oval office doing a public service announcement. He tells the public that he had Trump arrested and taken to a secret prison.</p>
+        <p>In one <a href='https://www.tiktok.com/@mrsfozz/video/7373385814803336481?lang=en'>deepfake TikTok of Biden</a> posted by the account Mrs. Fozz, the President addresses the nation from inside the oval office and admits to being the mastermind behind Trump’s “hush money” criminal trial. While the video does show signs of digitally manipulated content — as Biden’s face appears blurry and the voice is not in sync, it is not until Biden says “Psych! Who the f*ck am I kidding folks,” that viewers can be sure that it is not real.
+        </p>
 
-
+        <p>“All you're feeding them is more, so-called evidence to show that ‘look what Biden said’”, said Muller. “He didn't say it, but I believe it because I want to be right.”</p>
 
         <p>TikTok, which has been the subject of Congressional hearings and is under pressure to divest itself from its Chinese parent company ByteDance, has charged forward with efforts to flag fake AI-generated content.</p>
 
@@ -245,38 +314,172 @@
 
         <p>TikTok took down deepfake videos of Harris sounding incoherent soon after it went viral on the platform. But more deepfakes of Harris continued to show up in X, and TikTok. One of them was a parody ad reposted by X owner Elon Musk which features an AI voiceover of Harris calling herself the “ultimate diversity hire.”</p>
 
-        <p>Despite efforts to properly label AI-generated content, only 12% of the TikToks in the analysis had the "Made with AI" label.<p> 
+        <p>Despite TikTok's efforts to properly label AI-generated content, only 12% of the TikToks in the analysis had the "Made with AI" label.<p> 
 
-        <p>Calls to regulate the use of the use of artificial intelligence in social media platforms have strengthened in Congress. Federal regulators began their crackdown on deepfake technology impersonating politicians after a robocall of Biden told democrats not to participate in the primary election in New Hampshire.</p>
-
-        <p>Unlike in previous elections, the growing scope of misinformation stands out in 2024 as never before, as millions of social media users have the opportunity to pass manipulated content around the digital world at the click of a mouse.
-        </p>
-
+        <p>Calls to regulate the use of the use of artificial intelligence in social media platforms have strengthened in Congress. Federal regulators have begun their crackdown on deepfake technology impersonating politicians after a robocall of Biden told democrats not to participate in the primary election in New Hampshire.</p>
     </div>
 
-    <div class="figure">
-        <img src="https://via.placeholder.com/400" alt="Placeholder Image">
-        <p>Image Source</p>
-        <span>Image Caption</span>
+    <figure class="figure">
+        <div class="video-container">
+            <video class="custom-video" src="assets/samples/biden-psa.mp4"></video>
+            <button class="play-button">▶</button>
+        </div>
+        <figcaption>
+            <p><a href="https://www.tiktok.com/@mrsfozz/video/7373385814803336481">TikTok uploaded by @mrsfozz</a></p>
+            <span>A deepfake video of Biden telling the public that he had Trump arrested and taken to a secret prison.</span>
+        </figcaption>
+    </figure>
+
+    <div class="content">
+        <p>Election fakery is not new, it has been the stuff of negative campaigning for centuries. Muller's <a href="https://www.pbssocal.org/shows/socal-connected/clip/the-long-and-dirty-history-of-political-ad-campaigns">research</a> goes as far back as the 1800's when Thomas Jefferson's supporters called John Adams a monarchist.</p>
+
+        <p>But the speed and reach of AI-generated content is unprecedented. The 2024 Elections is the first time that anyone has access to artificial intelligence tools that can create fake videos, images, and audio which can be pushed out to millions of viewers online.</p>
+        
+        <p>Recent U.S. Elections have also shown how social media can be used to spread misinformation. In 2016, digital consultant, Cambridge Analytica, misused the data of millions of Facebook users for Trump’s presidential campaign. While in 2020, intelligence officials have reportedly found that Russia is interfering in the elections to try to support Trump’s reelection. </p>
+
+        <p>Beatriz Saab, a digital democracy researcher at Democracy Reporting International, released a <a href="https://www.ned.org/manufacturing-deceit-how-generative-ai-supercharges-information-manipulation/">report</a> on the ways in which generative AI has been used by authoritarians to manufacture deceit. Saab says generative AI has been used to create deepfakes of around events that are taking place in order to reinforce certain beliefs or fears.</p>
+
+        <p>“So they try to get a real incident and they manipulate the reality by adding elements or false images around something that really existed,” said Saab.</p>
+
+        <p>Deepfake images of Trump as a prisoner have been circulating on social media. The images show Trump in an orange jumpsuit, looking like an inmate and posing for fake mugshots.</p>
+
+        <p>But like many AI-generated content on TikTok, the fake image of Trump has been imbued with humor.</p>
+    </div>
+    
+    <figure class="figure">
+        <div class="video-container">
+            <video class="custom-video" src="assets/samples/trump-rapping.mp4"></video>
+            <button class="play-button">▶</button>
+        </div>
+        <figcaption>
+            <p><a href="https://www.tiktok.com/@st0l3nm3memes/video/7271671808980536618">TikTok uploaded by @st0l3nm3memes</a></p>
+            <span>A deepfake audio of Trump rapping about his time in prison.</span>
+        </figcaption>
+    </figure>
+
+    <div class="content">
+        <p> Saab said some studies have shown how satire has been used to seed harmful ideas such as online gender-based violence.</p>
+    
+        <p>“We do see that there are some studies that show how malicious actors used humor as a way to get past the platform guidelines,” said Saab. </p>
+
+        <p>TikTok as an entertainment platform has been known for creating dance challenges and making viral sounds. By packaging the TikToks as parodies, the AI-generated content has been able to bypass the platform’s guidelines on misleading content.</p>
+    </div>
+
+    <!-- Talk about the different categories again and then show graph AI2HTML -->
+    <!-- <figure class="figure">
+        <div class="image-container">
+        <img src="assets/graphs/data.png">
+        </div>
+        <figcaption>
+            <span>Source: Columbia University Graduate School of Journalism</span>
+            <p>Graph showing the distribution of AI-generated content on TikTok.</p>
+        </figcaption>
+    </figure> -->
+
+    <div class="content">
+     <h2>AI Presidents Gamer Memes</h2>
+
+     <p>In the analysis, the most common type of AI-generated content was gamer memes. The videos showed Biden and Trump playing video games and making jokes about each other.</p>
+
+     <p>Videos of the presidents as gamers started showing up in February 2023, when the account @presidentialdeepfakes posted a video of Biden and Trump hanging out at the amusement park. The video was viewed over 8 million times and other TikTokers started copying the format.</p>
+
     </div>
 
     <div class="content">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptates atque doloribus nihil officiis similique excepturi, ad sunt, esse sint iste magni nesciunt ipsam deleniti id dolor obcaecati doloremque nostrum?</p>
+        <p>The TikTok videos typically follow a consistent format: a split-screen presentation where the top half displays edited images of Presidents Joe Biden, Donald Trump, and Barack Obama wearing gaming headsets and the bottom half shows footage from an actual video game.</p>
+           
+        <p>While the videos are meant to be funny, they contain politically charged commentary. In one video of Presidential Deepfakes, Biden and Trump are shown playing an immersive football game called Madden NFL which quickly turns into political trash-talk.</p>
 
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptates atque doloribus nihil officiis similique excepturi, ad sunt, esse sint iste magni nesciunt ipsam deleniti id dolor obcaecati doloremque nostrum?</p>    
-    </div>
-    
+        <!-- <figure class="quote">
+            <blockquote>
+                <p><strong>TRUMP:</strong> Joe you are just mad I'm a better Madden player and president than you.</p>
+                <p><strong>BIDEN:</strong> The only thing you are better at than me is evading taxes you f*cking imbecile.</p>
+            </blockquote>
+            <figcaption>Snippet from Presidential Deepfakes TikTok</figcaption>
+        </figure> -->
 
-    <div class="content">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptates atque doloribus nihil officiis similique excepturi, ad sunt, esse sint iste magni nesciunt ipsam deleniti id dolor obcaecati doloremque nostrum?</p>
-    
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat adipisci eum harum cumque rem recusandae consectetur! Tempora aperiam debitis, labore odio inventore iste quos harum aliquid et doloribus impedit doloremque!</p>
+        <figure class="figure">
+            <div class="video-container">
+                <video class="custom-video" src="assets/samples/aipresidents.mp4"></video>
+                <button class="play-button">▶</button>
+            </div>
+            <figcaption>
+                <p><a href="https://www.tiktok.com/@presidentialdeepfakes/video/7202767199184932139">TikTok uploaded by @presidentialdeepfakes</a></p>
+                <span>A parody video of Biden and Trump playing Madden NFL.</span>
+            </figcaption>
+        </figure>
 
-    </div>
+        <p>Jessica Maddox, an assistant professor of digital media at the University of Alabama who has done extensive research into the creator economy on TikTok said one characteristic that makes this kind of video more engaging is its universal appeal.</p>
+
+        <p>“Anybody could kind of get what they want out of that video whether you're a conservative or liberal,” said Maddox. “There's so much lack of context that it could be humor, it could be serious. Somebody could hide behind just kidding.”</p>
+ 
 
     <div class="footer">
         <p>Footer</p>
     </div>
+
+<!-- scripts -->
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const videoContainers = document.querySelectorAll('.video-container');
+
+    videoContainers.forEach(container => {
+        const video = container.querySelector('.custom-video');
+        const playButton = container.querySelector('.play-button');
+
+        playButton.addEventListener('click', function() {
+            if (video.paused) {
+                video.play();
+                playButton.textContent = '❚❚'; // Change to pause symbol
+            } else {
+                video.pause();
+                playButton.textContent = '▶'; // Change back to play symbol
+            }
+        });
+
+        video.addEventListener('play', function() {
+            playButton.style.opacity = '0';
+        });
+
+        video.addEventListener('pause', function() {
+            playButton.style.opacity = '1';
+            playButton.textContent = '▶';
+        });
+
+        video.addEventListener('ended', function() {
+            playButton.style.opacity = '1';
+            playButton.textContent = '▶';
+        });
+    });
+});
+
+//     // Play and pause video
+//     document.addEventListener('DOMContentLoaded', function() {
+//     const video = document.getElementById('myVideo');
+//     const playButton = document.getElementById('playButton');
+
+//     playButton.addEventListener('click', function() {
+//         if (video.paused) {
+//             video.play();
+//             playButton.textContent = '❚❚'; // Change to pause symbol
+//         } else {
+//             video.pause();
+//             playButton.textContent = '▶'; // Change back to play symbol
+//         }
+//     });
+
+//     video.addEventListener('play', function() {
+//         playButton.style.opacity = '0';
+//     });
+
+//     video.addEventListener('pause', function() {
+//         playButton.style.opacity = '1';
+//         playButton.textContent = '▶';
+//     });
+// });
+</script>
 
 
 <script>
