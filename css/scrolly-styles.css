@@ -69,8 +69,50 @@
     margin-bottom: 0vh;
     }
 
+    @media screen and (max-width: 630px) {
+        .sticky-thing {
+            position: static;
+            height: auto;
+            min-height: 50vh;
+        }
+    
+        .scrolly-container video {
+            position: relative;
+            height: auto;
+        }
+    
+        .steps-container {
+            max-width: 100%;
+            padding: 0 1em;
+        }
+    
+        .step {
+            margin-bottom: 2em;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+        .step p {
+            font-size: 18px;
+        }
+    
+        #step1 {
+            margin-top: 2em;
+        }
+    
+        #step4 {
+            margin-bottom: 2em;
+        }
+    
+        .sticky-thing > svg {
+            width: 95%;
+            height: auto;
+        }
+    }
+
 /* Media query for screens less than 700px wide */
-@media (max-width: 699px) {
+/* @media (max-width: 699px) {
     .sticky-thing {
         position: static;
         height: auto;
@@ -92,10 +134,10 @@
     #step4 {
         margin-bottom: 2em;
     }
-}
+} */
 
 /* Media query for screens less than 500px wide */
-@media (max-width: 499px) {
+/* @media (max-width: 499px) {
     .step p {
         font-size: 16px;
     }
@@ -103,5 +145,5 @@
     .sticky-thing > svg {
         width: 90%;
         height: 90%;
-    }
-}
+    } */
+} 

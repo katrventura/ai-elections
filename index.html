@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Elections</title>
 
+    <meta property="og:title" content="Election Deepfake">
+    <meta property="og:description" content="AI-Generated Videos of Biden and Trump Slipping Through the Cracks of TikTok's Labeling Initiative">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="./assets/cover.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
 
     <link rel="stylesheet" href="css/scrolly-styles.css">
-    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+
 
 <style>
   .body {
@@ -23,57 +28,43 @@
         font-size: 20px;
     }
     .header {
-        height: 100vh;
-        width: 100%;
-        padding: 0;
-    }
-
-    .with-image-bg,
-    .with-video-bg {
-            position: relative;
-            background-size: cover;
-            background-position: center;
-        }
+    position: relative;
+    height: 100vh; /* Adjust as needed */
+}
 
     .with-image-bg {
-            background-image: url("assets/cover.png");
+        background-image: url("assets/cover.png"); /* Add your background image */
+        background-size: cover;
+        background-position: center;
     }
 
-    .video-background {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%; 
-        }
-
-    .video-background video {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
+    .header-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     .header-text {
-        /* background-color: lightcoral; */
         width: 40%;
-        margin: 0 auto;
-        position: relative;
-        top: 60%;
-        font-size: 20px;
+        text-align: center;
     }
 
     .header h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3em;
+        font-family: 'Noto Serif', serif;
+        font-size: 4em;
         padding-bottom: 10px;
-        text-align: center;
         color: white;
         text-shadow: 1px 1px 2px black;
     }
 
     .header h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1em;
-        text-align: center;
+        font-family: 'Noto Serif', serif;
+        font-size: 1.5em;
         padding-bottom: 10px;
         color: white;
         text-shadow: 1px 1px 2px black;
@@ -81,19 +72,17 @@
     }
 
     .header .byline {
-        /* background-color: beige; */
         padding: 10px;
         line-height: 1em;
-       
     }
 
     .header .byline p {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 0.8em;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1.5em;
         color: white;
         text-shadow: 1px 1px 2px black;
-        
-
+        margin: 5px 0;
+        padding: 5px;
     }
 
     .content {
@@ -106,13 +95,25 @@
 
     .content p {
         margin-bottom: 20px;
-        line-height: 1.3em;
+        line-height: 1.5em;
         font-size: 20px;
+        font-family: 'Noto Serif', serif;
+    }
+
+    .content h2 {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .content a {
+        color: #ff0050;
+        text-decoration: none;
     }
 
     /* figure */
     .figure {
-    background-color: lightgrey;
+    background-color: #f1f1f1;
     width: 600px;
     margin: 0 auto;
     position: relative;
@@ -139,16 +140,22 @@
     }
 
     .figure p {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 0.75em;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1em;
         margin: 0 0 5px 0;
         opacity: 0.8;
     }
 
     .figure span {
         font-size: 1em;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Public Sans', sans-serif;
         display: block;
+    }
+
+    .figure a {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
     }
 
     /* play videos */
@@ -205,16 +212,69 @@
     }
 
     .footer {
-        background-color: lightblue;
+        background-color: rgb(35, 34, 34);
         height: 100px;
         text-align: center;
+        padding: 4em;
+        opacity: 0.8;
     }
 
     .footer p {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 0.8em;
-        padding-top: 50px;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1em;
+        padding-top: 5px;
+        color: white;
     }  
+
+    .footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+    @media screen and (max-width: 630px) {
+    .header-text {
+        width: 90%;
+    }
+
+    .with-image-bg {
+        background-position: top center; /* Adjust background image position */
+        background-image: url("assets/cover.png");
+        background-size: contain;
+    }
+
+    .header h1 {
+        font-size: 2.5em;
+    }
+
+    .header h3 {
+        font-size: 1.2em;
+    }
+
+    .header .byline p {
+        font-size: 1em;
+    }
+
+    .content {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .content p {
+        font-size: 18px;
+    }
+
+    .content h2 {
+        font-size: 1.5em;
+    }
+
+    .figure {
+        width: 100%;
+    }
+
+    .quote {
+        width: 90%;
+    }
+}
 </style>
 </head>
 
@@ -247,19 +307,18 @@
         </div>
     </section>
 
-<!-- title graphic -->
-<div class="header">
-    <div class="header with-image-bg">
+<header class="header with-image-bg">
+    <div class="header-content">
         <div class="header-text">
             <h1>Election Deepfakes</h1>
-            <h3>AI-Generated Elections Content Slipping Through the Cracks of TikTok’s Labeling Initiative</h3>
-                <div class="byline">
-                    <p>By Katrina Ventura</p>
-                    <p>August 14, 2024</p>
-                </div>
+            <h3>AI-Generated Videos of Biden and Trump Slipping Through the Cracks of TikTok's Labeling Initiative</h3>
+            <div class="byline">
+                <p>By Katrina Ventura</p>
+                <p>August 14, 2024</p>
+            </div>
         </div>
     </div>
-</div>
+</header>
 
     <div class="content">
         <p>Presidents Joe Biden and Donald Trump have been the subject of many AI-generated TikTok viral moments which could easily shift from harmless tomfoolery to outright election threats.</p>
@@ -279,7 +338,7 @@
         <!-- <div class ="step" data-step="0" id="step1">
             <p>Over 500 TikToks had the hashtags #AIBiden or #AITrump.</p>
         </div> -->
-        <div class="step" data-step="1">
+        <div class="step" data-step="1" id="step1">
             <p>36% of the AI-generated content were memes of Biden and Trump playing video games.</p>
         </div>
         <div class="step" data-step="2">
@@ -368,8 +427,8 @@
             <button class="play-button">▶</button>
         </div>
         <figcaption>
-            <p><a href="https://www.tiktok.com/@st0l3nm3memes/video/7271671808980536618">TikTok uploaded by @st0l3nm3memes</a></p>
-            <span>A deepfake audio of Trump rapping about his time in prison.</span>
+            <p><a href="https://www.tiktok.com/@st0l3nm3memes/video/7271671808980536618">Source @st0l3nm3memes</a></p>
+            <span>An artificially generated audio clip featuring a voice mimicking Donald Trump rapping about his experiences in prison.</span>
         </figcaption>
     </figure>
 
@@ -389,8 +448,8 @@
             <button class="play-button">▶</button>
         </div>
         <figcaption>
-            <p><a href="https://www.tiktok.com/@aitrumporbiden/video/7257204951854730538">TikTok uploaded by @aitrumporbiden</a></p>
-            <span>A parody debate between Biden and Trump.</span>
+            <p><a href="https://www.tiktok.com/@aitrumporbiden/video/7257204951854730538">Source @aitrumporbiden</a></p>
+            <span>A computer-generated video depicting a fictional debate between AI representations of Joe Biden and Donald Trump.</span>
         </figcaption>
     </figure>
 
@@ -421,8 +480,8 @@
                 <button class="play-button">▶</button>
             </div>
             <figcaption>
-                <p><a href="https://www.tiktok.com/@presidentialdeepfakes/video/7202988788056984878">TikTok uploaded by @presidentialdeepfakes</a></p>
-                <span>A parody video of presidents Biden, Obama, and Trump playing Minecraft.</span>
+                <p><a href="https://www.tiktok.com/@presidentialdeepfakes/video/7202988788056984878">Source @presidentialdeepfakes</a></p>
+                <span>A digitally created video showing AI-generated versions of Presidents Biden, Obama, and Trump playing the video game Minecraft together.</span>
             </figcaption>
         </figure>
     
@@ -479,8 +538,8 @@
                 <button class="play-button">▶</button>
             </div>
             <figcaption>
-                <p><a href="https://www.tiktok.com/@hungne_hi/video/7238214412320918790">TikTok uploaded by @hungne_hi</a></p>
-                <span>An AI generated voice of Trump singing a Vietnamese nursery rhyme.</span>
+                <p><a href="https://www.tiktok.com/@hungne_hi/video/7238214412320918790">Source @hungne_hi</a></p>
+                <span>An AI-synthesized audio clip of a voice imitating Donald Trump singing a Vietnamese children's nursery rhyme.</span>
             </figcaption>
         </figure>
  
@@ -506,7 +565,8 @@
     
 
     <div class="footer">
-        <p>Footer</p>
+        <p>View Project on <a href="https://github.com/katrventura/ai-elections">GitHub</a></p>
+       <p>©2024 Katrina Ventura</p>
     </div>
 
 <!-- scripts -->
@@ -546,30 +606,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-//     // Play and pause video
-//     document.addEventListener('DOMContentLoaded', function() {
-//     const video = document.getElementById('myVideo');
-//     const playButton = document.getElementById('playButton');
-
-//     playButton.addEventListener('click', function() {
-//         if (video.paused) {
-//             video.play();
-//             playButton.textContent = '❚❚'; // Change to pause symbol
-//         } else {
-//             video.pause();
-//             playButton.textContent = '▶'; // Change back to play symbol
-//         }
-//     });
-
-//     video.addEventListener('play', function() {
-//         playButton.style.opacity = '0';
-//     });
-
-//     video.addEventListener('pause', function() {
-//         playButton.style.opacity = '1';
-//         playButton.textContent = '▶';
-//     });
-// });
 </script>
 
 
@@ -583,7 +619,8 @@ document.addEventListener('DOMContentLoaded', function() {
     .setup({
     parent: document.querySelector("#scrolly-videos"),
     step: ".step",
-    offset: 0.8,
+    // offset: 0.8,
+    offset: window.innerWidth <= 630 ? 0.5 : 0.8,
     debug: false,
     })
     .onStepEnter(function ({ element, index, direction }) {
@@ -624,6 +661,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     })
+
+
+    function handleResize() {
+        scroller.resize();
+        setupScroller();  // Re-setup with potentially new offset
+    }
     
     window.addEventListener("resize", scroller.resize)
     })()
