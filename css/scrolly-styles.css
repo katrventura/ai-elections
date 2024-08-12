@@ -42,7 +42,7 @@
 }
 
 .step {
-    color: black;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,8 +52,11 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     width: 100%;
     padding: 10px 16px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(38, 37, 37, 0.767);
+    font-family: 'Source Code Pro', sans-serif;
+    font-size: 1.5em;
     box-sizing: border-box;
+    text-shadow: 1px 1px 3px black;
 }
 
 .step p {
