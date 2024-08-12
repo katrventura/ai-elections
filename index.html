@@ -12,7 +12,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    
 
 
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
@@ -23,11 +24,13 @@
 
 
 <style>
-  .body {
+  body {
         text-rendering: optimizeLegibility;
         font-size: 20px;
+        background: #333333;
+        color: white;
     }
-    .header {
+    header {
     position: relative;
     height: 100vh; /* Adjust as needed */
 }
@@ -38,7 +41,17 @@
         background-position: center;
     }
 
-    .header-content {
+    .hero {
+        position: relative;
+        height: 100vh;  
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* margin-top:150px; */
+    }
+
+    header .header-content {
         position: absolute;
         top: 0;
         left: 0;
@@ -53,31 +66,35 @@
         width: 40%;
         text-align: center;
     }
+    .content h3 {
+        font-family: Source Code Pro, sans-serif;
+        font-size: 1.25em;
+    }
 
-    .header h1 {
-        font-family: 'Noto Serif', serif;
+    header h1 {
+        font-family: 'Source Code Pro', serif;
         font-size: 4em;
         padding-bottom: 10px;
         color: white;
         text-shadow: 1px 1px 2px black;
     }
 
-    .header h3 {
-        font-family: 'Noto Serif', serif;
-        font-size: 1.5em;
+    header h3 {
+        font-family: 'Source Code Pro', serif;
+        font-size: 2em;
         padding-bottom: 10px;
         color: white;
         text-shadow: 1px 1px 2px black;
         line-height: 1.3em;
     }
 
-    .header .byline {
+    header .byline {
         padding: 10px;
         line-height: 1em;
     }
 
-    .header .byline p {
-        font-family: 'Public Sans', sans-serif;
+    header .byline p {
+        font-family: 'Source Code Pro', sans-serif;
         font-size: 1.5em;
         color: white;
         text-shadow: 1px 1px 2px black;
@@ -97,11 +114,11 @@
         margin-bottom: 20px;
         line-height: 1.5em;
         font-size: 20px;
-        font-family: 'Noto Serif', serif;
+        font-family: 'Roboto', sans-serif;
     }
 
     .content h2 {
-        font-family: 'Public Sans', sans-serif;
+        font-family: 'Source Code Pro', sans-serif;
         font-size: 2em;
         margin-bottom: 20px;
     }
@@ -113,7 +130,7 @@
 
     /* figure */
     .figure {
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
     width: 600px;
     margin: 0 auto;
     position: relative;
@@ -124,9 +141,31 @@
         display: block;
     }
 
+    /* .hero-figure {
+        width: 900px;
+        margin: 0 auto;
+        position: relative; 
+    } */
+
+    .hero-figure {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    /* height: 100vh;   */
+    margin: 0;
+    width: 900px;
+}
+
+figure .video-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
     .figure .image-container {
     width: 100%;
-    background-color: white;
+    /* background-color: white; */
     }
 
     .figure img {
@@ -153,7 +192,7 @@
     }
 
     .figure a {
-        color: black;
+        color: white;
         font-weight: bold;
         text-decoration: none;
     }
@@ -162,6 +201,7 @@
     .video-container {
     position: relative;
     width: 100%;
+    margin: 0 auto;
     }
 
     .custom-video {
@@ -275,43 +315,108 @@
         width: 90%;
     }
 }
+
+
+</style>
+
+<style>
+.hero {
+    display: flex;
+    justify-content: center;   /* Center horizontally */
+    align-items: center;       /* Center vertically */
+    height: 100vh;             /* Full viewport height */
+    text-align: center;        /* Center text horizontally */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;    /* Stack content vertically */
+    align-items: center;       /* Center content horizontally */
+    justify-content: center;   /* Center content vertically */
+}
+
+.hero-figure {
+    margin: 20px 0;            /* Optional: Add some margin around the video */
+}
+
+.video-container {
+    position: relative;
+    display: flex;
+    justify-content: center;   /* Center video horizontally */
+    align-items: center;       /* Center video vertically */
+}
+
+.custom-video {
+    width: 1000px;
+    max-width: 100%;  /* Ensure the video is responsive on smaller screens */
+    max-height: 100%;
+}
+
 </style>
 </head>
 
 <body>
-
-<!-- scrolly harris-videos -->
-
-    <section id="scrolly-videos" class="scrolly-container">
-        <div class="sticky-thing">
-          <video src="assets/harris-videos/harris-1.mp4" alt="Cover image" loop muted>
-            <source src="" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+<header>
+    <div class="header-content">
+        <div class="header-text" id="harris">
+        <h3>It only took hours after the U.S. President Joe Biden ended his bid for re-election before fake videos mocking his successor, Kamala Harris, started racing through social media.
+        </h3>
         </div>
-        <div class="steps-container">
-          <div class="step" id="step1">
-            <div>
-              <p>It only took hours after U.S. President Joe Biden ended his bid for re-election before fake videos mocking his successor, Kamala Harris, started racing through social media.</p>
-            </div>
-          </div>
-          <div class="step" id="step2">
-            <p>In just one example on TikTok, artificial intelligence tools were used to mimic the voice of Harris and make her ramble incoherently about how "today was today and yesterday was today."</p>
-          </div>
-          <div class="step" id="step3">
-            <p>More altered and deceptive videos of Harris started showing up with the hashtag #wordsaladswithkamala.</p>
-          </div>
-          <div class="step" id="step4">
-            <p>Harris, the target of the videos, was new. But the quick shift showed how AI tools can be used to create fake videos and influence voters.</p>
-          </div>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="content">
+        <h3>In just one example on TikTok posted the day Biden dropped out, artificial intelligence tools were used to mimic the voice of Harris and make her ramble incoherently about how "today was today and yesterday was today."
+        </h3>
+
+    <figure class="hero-figure">
+        <div class="video-container">
+            <video class="custom-video" src="assets/harris-videos/sequence1.mp4"></video>
+            <button class="play-button">▶</button>
         </div>
-    </section>
+        </figure>
+    </figure>
+</div>
+</div>
+
+<div class="hero">
+    <div class="content">
+        <h3>Elon Musk, the owner of X formerly known as Twitter, piled on the negative campaigning days later, sharing with his 193.8 million followers a fake campaign ad of Harris calling herself a “diversity hire.”
+        </h3>
+
+    <figure class="hero-figure">
+        <div class="video-container">
+            <video class="custom-video" src="assets/harris-videos/harris-twiiter.mp4"></video>
+            <button class="play-button">▶</button>
+        </div>
+    </figure>
+</div>
+</div>
+
+
+<header>
+    <div class="header-content">
+        <div class="header-text" id="harris">
+        <h3>Harris, the target of the videos, was new, compared to similar attacks on Biden. But the quick shift showed how AI tools can be used to create fake videos and influence voters.
+        </h3>
+        </div>
+    </div>
+</header>
+
+<!-- <header>
+    <div class="hero">
+        <div class="content">
+            <h3>Artificial intelligence tools were used to mimic Harris' voice. But by the time these were fact-checked or taken down, they had been seen by <a href>millions of users on social media</a>.</h3>
+    </div>
+</header> -->
+
 
 <header class="header with-image-bg">
     <div class="header-content">
         <div class="header-text">
-            <h1>Election Deepfakes</h1>
-            <h3>AI-Generated Political Videos Slipping Through the Cracks of TikTok's Labeling Initiative</h3>
+            <h1>POLITICAL DEEPFAKES FLOOD TIKTOK</h1>
+            <h3>Videos Generated With Artificial Intelligence Distort 2024 Presidential Race</h3>
             <div class="byline">
                 <p>By Katrina Ventura</p>
                 <p>August 14, 2024</p>
@@ -322,13 +427,18 @@
 
     <div class="content">
         
-        <p>Unlike in previous elections, the growing scope of misinformation stands out in 2024 as never before, as millions of social media users have the opportunity to pass convincing and fake content around the digital world at the click of a mouse.</p>
+        <p>Unlike in previous elections, the growing scope of misinformation stands out in 2024 as never before, as millions of social media users have the opportunity to pass convincing and fake content around the digital world at the click of a mouse.
+        </p>
             
-        <p>The amount and impact of AI-generated content spreading on social media platforms like TikTok, changes from day to day in the ever-morphing world of social media. They range from fact-based attempts to present the issues to light-hearted hummor to outright distortions of the truth.</p>
+        <p>The amount and impact of AI-generated content spreading on social media platforms like TikTok, changes from day to day in the ever-morphing world of social media. </p>
 
-        <p>However, an analysis by the Columbia University Graduate School of Journalism of over 500 TikTok videos and images with the hashtags #AIBiden or #AITrump reveals a host of strategies employed by content creators to poke fun at the former presidents — not always with the truth as the top priority.</p>
+        <p>But an analysis by the Columbia University Graduate School of Journalism of over 500 TikTok videos and images reveals multiple ways AI-generated content is being used this year to try to influence the way voters see the election - and not always with the truth in mind.</p>
 
-        <p>Most of the analysis was done before Biden dropped out of the race in July 21. However, the pattern has continued into Harris' candidacy.</p>
+        <P>They range from fact-based attempts to present the issues to light-hearted humor to outright distortions of fact.</P>
+
+        <p>Beyond that, the analysis showed  TikTok’s spotty record in carrying out its stated policy of labeling videos created by artificial intelligence, leaving viewers with the daunting  challenge of deciding for themselves. That scenario leaves them vulnerable to potentially harmful and deceiving content.</p>
+
+        <p>The analysis showed that:</p>
 
     </div>
     
@@ -342,37 +452,67 @@
             <p>Over 500 TikToks had the hashtags #AIBiden or #AITrump.</p>
         </div> -->
         <div class="step" data-step="1" id="step1">
-            <p>36% of the AI-generated content were memes of Biden and Trump playing video games.</p>
+            <p>36% of TikTok videos with hashtags #AIBiden or #AITrump are memes of Biden and Trump playing video games.</p>
         </div>
         <div class="step" data-step="2">
-            <p>39% of the AI-generated content are digitally altered content meant to distort the truth, also known as deepfakes.</p>
+            <p>39% of TikTok videos with hashtags #AIBiden or #AITrump are deepfakes - digitally altered videos or images - from past debates or public service announcements.</p>
         </div>
         <div class="step" data-step="3">
-            <p>While 20% were AI voices of Biden and Trump singing random songs, including ones in Vietnamese.</p>
+            <p>While 20% of TikTok videos with hashtags #AIBiden or #AITrump are AI voices of the presidents singing random songs.</p>
         </div>
         <div class="step" data-step="4" id="step4">
-            <!-- <p>The remaining TikToks featured content creators or random videos using #AIBiden or #AITrump.</p> -->
-            <p>Only 12% of the TikToks in the analysis were labeled and  flagged as AI-Generated Content by the platform.</p>
+            <p>12 TikTok song covers featured Trump singing in Vietnamese.</p>
         </div>
     </div>
 </section>
 
+<header>
+<div class="header-content">
+    <div class="header-text" id="harris">
+    <h3>Despite all of these videos being artificially generated, only 12% were flagged by TikTok or labeled by the users who posted them as “Made with AI”. 
+    </h3>
+    </div>
+</div>
+</header>
+
     <div class="content">
         
-        <p>Election fakery is not new but the volume and reach that AI-generated content can get on social media is unprecedented. What is new is the growing number of easy-to-use artificial intelligence tools available to internet users that can create fake videos, images and audio that can be spread across social media websites.</p>
+        <p>The TikTok videos were scraped from the platform using a hashtag analysis tool which searches for and saves all videos that have certain words or topics attached to them. The hashtags used in this analysis were #AIBiden and #AITrump, and the program gave TikToks from December 2022 to June 2024. Of the 587 TikToks that contained the specific hashtags, 536 used artificial intelligence tools to create images of the presidents, mimic voices, or digitally alter actual videos taken from debates, rallies or public service announcements.
+        </p>
+
+        <p>While the analysis was done before Biden dropped out of the race on July 21, the same pattern has continued into Harris' candidacy.</p>
+
+        <p>Maurice Turner, a public interest technologist and cybersecurity expert on TikTok’s Global Public Policy Team, said over 98% of election related deceptive content is taken down by the system even before it gets flagged.
+        </p>
+
+        <p>“We do things like have machine-based processes as well as human-based processes for detecting and being able to evaluate content that we suspect might be deceptive,” said Turner.</p>
+
+        <p>But experts say that while some of the content appears to be benign, much of it is not. The use of artificial intelligence for political content is a slippery slope that has the potential to disrupt the electoral process.</p>
+        
+        <p>“This is really a dangerous thing that's gotten away from us and people are going to have to be trained in looking for legitimate news sources,” said Judy Muller, a retired professor from the USC Annenberg School of Journalism.
+        </p>
+
+        <p>“They can make these silly, seemingly harmless videos as practice and then hone their AI manipulated media skills for something that could go viral in a context that isn't so clearly a joke,” said Jessica Maddox, an assistant professor of digital media at the University of Alabama. 
+        </p>
+
+        <p>Election fakery is not new. What is new is that the volume and reach that AI-generated content can get on social media is unprecedented amid the growing number of easy-to-use artificial intelligence tools available to internet users that can create fake videos, images and audio that can be spread across social media websites.
+        </p>
             
         <p>Calls to regulate the use of artificial intelligence on social media have strengthened in <a href="https://rollcall.com/2024/06/04/congress-wrestles-with-ais-boost-to-campaigns-potential-misuse/">Congress</a> after videos of Harris speaking incoherently went viral on TikTok. While federal regulators continue their crackdown on deepfake technology impersonating politicians after a <a href="https://apnews.com/article/biden-robocalls-ai-new-hampshire-charges-fines-9e9cc63a71eb9c78b9bb0d1ec2aa6e9c">robocall</a> of Biden told democrats not to participate in the primary election in New Hampshire.</p>
         
-        <p>But Judy Muller, a retired professor from the USC Annenberg School of Journalism, said efforts to contain generative AI content might be too late.</p>
+        <p>But Muller said efforts to contain generative AI content might be too late.</p>
         
-        <p>“It is really a whole new ball game.” said Muller. "It's one thing in the old days to have those old chants, mudslinging and political campaigns because it wasn't everywhere all at once. But that is what's happening — AI is everywhere all at once and it is powerful."</p>
-
-        <p>The rise of social media platforms like TikTok, which has been the subject of Congressional hearings and is under pressure to divest itself from its Chinese parent company ByteDance, have allowed this content to spread rapidly.</p>
-
-        <p>In one <a href='https://www.tiktok.com/@mrsfozz/video/7373385814803336481?lang=en'>deepfake TikTok of Biden</a> posted by the account Mrs. Fozz, the President addresses the nation from inside the oval office and admits to being the mastermind behind Trump’s “hush money” criminal trial. While the video does show signs of digitally manipulated content — as Biden’s face appears blurry and the voice is not in sync, it is not until Biden said “Psych! Who the f*ck am I kidding folks,” that viewers can be sure that it is not real.
+        <p>"It's one thing in the old days to have those old chants, mudslinging and political campaigns because it wasn't everywhere all at once. But that is what's happening — AI is everywhere all at once and it is powerful," said Muller.
         </p>
 
-        <p>“I think the horse has left the barn,” said Muller. “These are some of the most primitive fakes that I've seen and honestly they're better already.”</p>
+        <p>That power can be seen any day, at any time on Tiktok.
+        </p>
+
+        <p>In one <a href='https://www.tiktok.com/@mrsfozz/video/7373385814803336481?lang=en'>deepfake TikTok of Biden</a> posted by the account Mrs. Fozz, the President addresses the nation from inside the oval office and admits to being the mastermind behind former President Donald Trump’s “hush money” criminal trial. While the video does show signs of digitally manipulated content — Biden’s face appears blurry and the voice is not in sync - it is not until Biden says “Psych! Who the f*ck am I kidding folks,” that viewers can be sure that it is not real.
+        </p>
+
+        <p>“I think the horse has left the barn,” said Muller. “These are some of the most primitive fakes that I've seen and honestly they're better already.”
+        </p>
 
     </div>
 
@@ -389,87 +529,61 @@
     
     <div class="content">
 
-        <p>Maurice Turner, a public interest technologist and cybersecurity expert on TikTok’s Global Public Policy Team, said over 98% of election related deceptive content is taken down by the system even before it gets flagged.</p>
-
-        <p>“We do things like have machine-based processes as well as human-based processes for detecting and being able to evaluate content that we suspect might be deceptive,” said Turner.</p>
-
-        <p>TikTok took down deepfake videos of Harris sounding incoherent soon after it went viral on the platform. But more deepfakes of Harris continued to show up in X, and TikTok. One of them was a <a href="https://apnews.com/article/parody-ad-ai-harris-musk-x-misleading-3a5df582f911a808d34f68b766aa3b8e">parody ad</a> reposted by X owner Elon Musk of Harris calling herself the “ultimate diversity hire” which reached 130 million views.</p>
-
-        <!-- Muller -->
-
-        <p>“I do think you should stop worrying about the people who do it, and worry about the people who consume it,” said Muller. “We have to have the Clean Air waves and the clean media in the sense that it can't be infiltrated by fake AI and bots and they're just going to have to be some controls.”
-        </p>
-
-    </div>
-
-    <!-- insert graph of AI labels -->
-    <!-- <figure class="figure">
-        <div class="video-container">
-            <video class="custom-video" src="assets/samples/harris-diversity.mp4"></video>
-            <button class="play-button">▶</button>
-        </div>
-        <figcaption>
-            <p><a href="https://www.tiktok.com/@elonmusk/video/7373385814803336481">TikTok uploaded by @elonmusk</a></p>
-            <span>A deepfake video of Harris calling herself the "ultimate diversity hire."</span>
-        </figcaption> -->
-
-    <div class="content">
-        <h2>AI Elections Deepfakes</h2>
-
-        <p>The potential dangers of social media deceit were highlighted in a study by Beatriz Saab, a digital democracy researcher at a German based organization called Democracy Reporting International, released a <a href="https://www.ned.org/manufacturing-deceit-how-generative-ai-supercharges-information-manipulation/">report</a> on the ways in which generative AI has been used by authoritarians to manufacture deceit. She found that generative AI has been used to create deepfakes of around events that are taking place in order to reinforce certain beliefs or fears.</p>
+        <p>The potential dangers of social media deceit were highlighted in a study by Beatriz Saab, a digital democracy researcher at a German based organization called Democracy Reporting International who released a report on the ways in which generative AI has been used by authoritarians to manufacture deceit. She found that AI has been used to create deepfakes around events that are taking place in order to reinforce certain beliefs or fears.</p>
 
         <p>Deepfake images of Trump as a prisoner have been circulating on social media. The images show Trump in an orange jumpsuit, looking like an inmate and posing for fake mugshots.</p>
 
         <p>Like many AI-generated content on TikTok, the fake image of Trump has been imbued with humor.</p>
 
-    </div>
-    
-    <figure class="figure">
-        <div class="video-container">
-            <video class="custom-video" src="assets/samples/trump-rapping.mp4"></video>
-            <button class="play-button">▶</button>
-        </div>
-        <figcaption>
-            <p><a href="https://www.tiktok.com/@st0l3nm3memes/video/7271671808980536618">Source @st0l3nm3memes</a></p>
-            <span>An artificially generated audio clip featuring a voice mimicking Donald Trump rapping about his experiences in prison.</span>
-        </figcaption>
-    </figure>
+        <p>Nevertheless, said Saab, the underlying harm is clear.
+        </p>
 
-    <div class="content">
+        <p>Trump’s running mate, Ohio Senator JD Vance, was also the subject of attacks after a fake passage spread online about a sex act and a couch supposedly written in his 2016 memoir, “Hillbilly Elegy”.</p>
 
-        <!-- <p>Trump's running mate is also the subject of attack. 
-        </p> -->
-
-        <p>Nevertheless, said Saab, the underlying harm is clear.</p>
+        <p>The lie has spawned jokes and memes on X and TikTok even as the original joke’s author clarified it was not real, and several news outlets published fact-checks of the claim. 
+        </p>
 
         <p>“They try to get a real incident and they manipulate the reality by adding elements or false images around something that really existed,” said Saab.</p>
-    
-        <p>TikTok as an entertainment platform has been known for creating dance challenges and making viral sounds. By packaging the TikToks as parodies, the AI-generated content has been able to bypass the platform’s guidelines on misleading content.</p>
-        
-        <p> Saab said some studies have shown how satire has been used to seed harmful ideas such as online gender-based violence.</p>
-    
-        <p>“We do see that there are some studies that show how malicious actors used humor as a way to get past the platform guidelines,” said Saab. </p>
+
+        <p>TikTok as an entertainment platform has been known for creating dance challenges and making viral sounds. By packaging the TikTok videos as parodies, the AI-generated content has been able to bypass the platform’s guidelines on misleading content.
+        </p>        
+
+        <p>Saab said some studies have shown how satire has been used to seed harmful ideas such as online gender-based violence.
+        </p>
+
+        <p>“We do see that there are some studies that show how malicious actors used humor as a way to get past the platform guidelines,” said Saab. 
+        </p>
+
+        <h2>Past Political Distortions</h2>
+
+        <p>Negative campaigning  has had its place in politics for centuries, going as far back as the year 1800 when Republican Party candidate Vice President Thomas Jefferson's supporters called the incumbent President John Adams a monarchist. Adams’ supporters in turn called Jefferson an atheist. Both were not true. 
+        </p>
+
+        <p>Meanwhile, presidential candidate Al Smith, who was the first Roman Catholic to be nominated by a major party, was attacked for his religious beliefs and was rumored that he would take orders from the Pope. 
+        </p>
+
+        <p>In 1952, Republican operatives started rumors that Democratic presidential candidate Adlai Stevenson, a divorced and intellectual former diplomat, was a homosexual. Stevenson lost both the 1952 and1956 elections to President Dwight Eisenhower, who shortly after coming into office signed an executive order which barred gay people from serving in the federal government. </p>
+
+        <p>Fast forward to 2024 and anyone with a phone or laptop has the power to shape political thoughts, using varying levels of accuracy, without having to be part of any election campaign.</p>
+
+        <h2>AI Elections Deepfakes</h2>
+
+        <p>In the analysis of TikTok videos, different ways that users employ artificial intelligence tools to generate political content emerged.</p>
+
+        <p>President Joe Biden, as well as Trump, were the subject of many AI-generated TikTok viral moments months before the Democratic and Republican parties decided on the candidates for the 2024 presidential elections. As soon as free-to-use voice generating tools or text-to-image artificial intelligence tools became available online, online creators started experimenting and poking fun at the image and voices of the two Presidents. 
+        </p>
+
+        <p>The TikTok account @aitrumporbiden produced a steady stream of content of the two presidents engaged in a debate in July 2023. The video used clips from the presidential debate between Biden and Trump, and paired it with AI-generated voices of the two presidents. The channel pokes fun at the two presidents and involves Biden and Trump trash talking one another. In some videos, users would post questions in the comments, and these questions would be fed into an AI program that generated responses mimicking how the Presidents might answer. 
+        </p>
+
+        <p>Accounts have also been created to garner support around the two presidents. The TikTok account @talkthenews features AI-generated content of Biden as a character called 'Papa Joe.' With 71 followers, the account's videos average 200 views each. The AI-generated videos typically depict Biden seated by a fireplace, wearing a suit, and consistently smiling.
+        </p>
+
+        <p>While the TikTok account @trumposaurusrex was created to upload AI-generated images of Trump as heroes and main characters in movies. The account has more than a thousand followers and 2000 likes. Trump is depicted as Aquaman, Green Lantern, Batman, or as a gladiator, Men in Black, Jedi in Star Wars.
+        </p>
 
     </div>
-
-    <div class="content">
-        <h2>Political Distortions in the Past</h2>
-
-        <!-- <p>Here is where you need the brief history of world talking about how political distortion has been
-            around for centuries. Cite the 1800 example from Muller and summarize another example she found.
-            This..&gt;&gt; In that same year, the GOP started rumors that Democrat Adlai Stevenson was a homosexual,
-            something that seems as quaint today as charging that a candidate has black ancestors, which actually
-            happened in 1920 when a Democratic whisper campaign said that about Warren G. Harding. A
-            candidate&#39;s religion used to be fair game, as well. Three-time presidential candidate Al Smith was
-            attacked for his Catholicism and the belief that he would take orders from the Pope, something that
-            lingered into John Kennedy&#39;s day.&lt;&lt;
-            But what is different today is the power individuals have to spread it around.</p> -->
-
     
-
-        <p>Generative AI tools have also been used to create fake presidential debates between Biden and Trump. The account @aitrumporbiden has been uploading clips of the two presidents debating as early as July 2023, before any nomination was made. The channel pokes fun at the two presidents and involves Biden and Trump trash talking one another. At times the videos are made to show Biden talking incoherently, and Trump talking about World of Warcraft.</p>
-    </div>
-
     <figure class="figure">
         <div class="video-container">
             <video class="custom-video" src="assets/samples/debate.mp4"></video>
@@ -481,25 +595,21 @@
         </figcaption>
     </figure>
 
-
-    <div class="content">
-
-        <p>Some TikTok accounts use generative AI to garner support around the two presidents The TikTok account @talkthenews features AI-generated content of Biden as a character called 'Papa Joe.' With 71 followers, the account's videos average 200 views each. The AI-generated videos typically depict Biden seated by a fireplace, wearing a suit, and consistently smiling.</p>
-
-        <p>Another TikTok account @trumposaurusrex was created to upload AI-generated images of Trump as heroes and main characters in movies. The account has more than a thousand followers and 2000 likes. Trump is depicted as Aquaman, Green Lantern, Batman, or as a gladiator, Men in Black, Jedi in Star Wars.</p>
-
-    </div>
-
     <div class="content">
      <h2>Gamer Memes</h2>
 
-        <p>Another popular use of generative AI on TikTok is to create gamer memes of the two presidents. Videos of the presidents as gamers started showing up in February 2023, when the account @presidentialdeepfakes posted a video of Biden and Trump hanging out at the amusement park. The video was viewed over 8 million times and other TikTokers started copying the format.</p>
+        <p>Another popular use of generative AI on TikTok is to create gamer memes of the two presidents. Videos of the presidents as gamers started showing up in February 2023, when the account @presidentialdeepfakes posted a video of Biden and Trump hanging out at the amusement park. The video was viewed over 8 million times and other TikTokers started copying the format.
+        </p>
      
-        <p>The TikTok videos typically follow a consistent format: a split-screen presentation where the top half displays edited images of Presidents Joe Biden, Donald Trump, and Barack Obama wearing gaming headsets and the bottom half shows footage from an actual video game.</p>
+        <p>The TikTok videos typically follow a consistent format: a split-screen presentation where the top half displays edited images of Presidents Joe Biden, Donald Trump, and Barack Obama wearing gaming headsets and the bottom half shows footage from an actual video game.
+        </p>
 
-        <p>The AI parodies tend to be humorous as users would comment about how they find the videos entertaining. The parodies are neither pro-Biden or pro-Trump and equally mocks or highlights the negative stereotypes of each character.</p>
+        <p>The AI parodies tend to be humorous as users would comment about how they find the videos entertaining. The parodies are neither pro-Biden or pro-Trump and equally mocks or highlights the negative stereotypes of each character.
+        </p>
 
-        <p>Biden is almost always depicted as a timid, slow character who is often the coward in these scenarios. He is called sleepy joe by his peers and would get mocked at “messing things up” or being weird. While Trump is often depicted as the reckless, arrogant character bullying Biden but also gets trash talked by his peers and mocked for being a felon. Another interesting character is former President Barack Obama who often comes in defense of Biden and is often the voice of reason in these scenarios.</p> 
+        <p>Biden is almost always depicted as a timid, slow character who is often the coward in these scenarios. He is called “sleepy Joe” by his peers and would get mocked at “messing things up” or being weird. While Trump is often depicted as the reckless, arrogant character bullying Biden, he also gets trash talked by his peers and mocked for being a felon. Another character is former President Barack Obama who often comes in defense of Biden and is often the voice of reason in these scenarios.
+        </p> 
+
     </div>
 
         <figure class="figure">
@@ -515,36 +625,28 @@
     
     <div class="content">
 
-        <p>Jessica Maddox, an assistant professor of digital media at the University of Alabama who has done research into the creator economy on TikTok said the videos were created to be entertaining to reach a wider audience, which is a similar strategy used by content farms.</p>
+        <p>Maddox, who has done research into the creator economy on TikTok, said the videos were created to be entertaining to reach a wider audience, which is a similar strategy used by content farms.</p>
 
-        <p>Content farming refers to the practice of producing large quantities of low-quality content with the primary aim of generating revenue through online advertising. Basic AI tools now make it easier for users to create and publish videos rapidly to temporarily boost views and likes on the page.</p>
+        <p>Content farming refers to the practice of producing large quantities of low-quality content with the primary aim of generating revenue through online advertising. Basic AI tools now make it easier for users to create and publish videos rapidly to temporarily boost views and likes on the page.
+        </p>
 
         <p>A <a href="https://www.404media.co/inside-the-world-of-tiktok-spammers-and-the-ai-tools-that-enable-them/">report</a> by 404 Media highlights a user offering a masterclass on using AI tools to generate spam content, claiming to have earned thousands of dollars from the platform. The videos featured in the masterclass combine clips from video games with trivia narrated by an AI-generated voice, similar to the videos of the presidents playing video games.</p>
 
         <p>“Anybody could kind of get what they want out of that video whether you're a conservative or liberal,” said Maddox. “There's so much lack of context that it could be humor, it could be serious. Somebody could hide behind just kidding.”</p>
 
-        <!-- <p>Here is where you can say something about how it’s not just content creators spreading various levels
-            of misinformation. The reach can get accelerated further by non-political TikTok uses taking the
-            videos and sharing them simply to generate more followers and income.</p> -->
+        <p>Beyond political content creators on TikTok are others also are aiding the misinformation spread. Non-political TikTok users, whose past content focused on other topics, also helped by taking these videos and sharing them, simply to gain more followers and income.
+        </p>
 
-        <p>Content recycling is evident across multiple creators. One particular video of the presidents playing video games has been repurposed with different storylines. Notably, the same AI-generated image of Biden wearing headsets appears in various videos by different users, suggesting widespread reuse of certain AI-generated assets.</p>
+        <p>The TikTok account @gcabin which has 1.5 million followers, uploaded a gamer meme of Biden discussing music while playing over Minecraft footage as a way to take part of the trend. Meanwhile, @lilnubbycake which was originally created for video game content, also branched out and started creating presidential gamer memes to get an extra 4000 views on TikTok.</p>
 
-    </div>
+        <p>“Essentially, the same YouTube short makes thousands of dollars on YouTube but they may make $40 on TikTok,” said Maddox. "So it's really interesting to me that we are seeing this kind of AI content farming, engagement bait on TikTok, when TikTok isn't typically a high-paying platform.”
+        </p>
 
-    <!-- create a figure of 4 images repeating -->
-
-    <div class="content">
-        <p>However, TikTok is a notoriously low-paying platform for creators which is why Maddox suggests the motivation for spamming humorous, and non-partisan AI-generated videos on TikTok might be for the purpose of engagement.</p>
-
-        <p>“Essentially, the same YouTube short makes thousands of dollars on YouTube but they may make $40 on TikTok,” said Maddox. "So it's really interesting to me that we are seeing this kind of AI content farming, engagement bait on TikTok, when TikTok isn't typically a high-paying platform.”</p>
+        <p>Presidential gamer memes have also been repurposed by multiple accounts, each using the same AI image of Biden or Trump in a different storyline with the purpose of driving engagement.</p>
 
         <p>TikTok’s <a href="https://www.tiktok.com/legal/page/global/tiktok-creativity-program-beta-terms-eea/en">Creativity Program Beta</a> requires accounts to have at least 10,000 authentic followers on the platform, and 100,000 authentic video views in order to qualify for the rewards feature. Only a fifth of the TikTok videos in the random sample have enough followers to satisfy the first requirement.</p>
 
-        <p>Among them are TikTok accounts such as Gcabin and Lilnubbycake that have jumped in the bandwagon of AI President videos. The TikTok account @gcabin which has 1.5 million followers and 29.2 million likes and describes itself as a "daily dose of internet highlights", uploaded a gamer meme of Biden discussing music while playing over Minecraft footage. Meanwhile, @lilnubbycake which has 670.3K followers and 38.5M likes and was originally created for video game content, also started uploading AI-generated videos of Biden and Trump playing video games which averages 4000 views.</p> 
-
-        <p>While these AI-generated videos often place presidential candidates in absurd contexts or use language atypical for political figures, Maddox said there is a danger in how well the audio mimics Biden and Trump’s voices.</p>
-
-        <p>“They can make these silly, seemingly harmless videos as practice and then hone their AI manipulated media skills for something that could go viral in a context that isn't so clearly a joke,” said Maddox.</p>
+        <p>While these AI-generated videos often place presidential candidates in absurd contexts or use language atypical for political figures, Maddox says there is a danger in how well the audio mimics Biden and Trump’s voices.</p>
 
     </div>
 
@@ -583,24 +685,21 @@
     </div>
 
     <div class="content">
-        <h2>TikToker's Reaction</h2>
+        <h2>Conclusion</h2>
 
-        <p>TikTok users commenting on the AI-generated TikToks of the presidents say they have expressed that they understand that these videos play with the humor of TikTok. While they are not meant to be taken seriously Muller believes that there is cause for concern.
+        <p>As the presidential election approaches, the recent surge of AI-generated content on TikTok featuring Harris highlights the challenges facing fact-checkers and social media platforms to handle the constant flood of misinformation and negative campaigning online. 
         </p>
-
-         <!-- create a figure of 4 images repeating -->
          
-        <p>“I do think you should stop worrying about the people who do it, and worry about the people who consume it,” said Muller. “We have to have the Clean Air waves and the clean media in the sense that it can't be infiltrated by fake AI and bots and they're just going to have to be some controls.”
+        <p>Some social media observers are pushing for media literacy. Muller said more attention should be paid to the people watching these videos than those who are putting out the political fakes.
         </p>
 
-        <!-- end is a look forward to how the measures of the legislators come to how social media doesn't damage teenagers. and also ssaid that it comes at a time when lawmakers are trying to impose restrictions with the goal of lessening the damaging impact on teenagers -->
+        <p>“We have to have the Clean Air waves and the clean media in the sense that it can't be infiltrated by fake AI and bots and they're just going to have some controls,” said Muller.</p>
 
-        <!-- legislation does not matter because it's too late. efforts to. whatever they are doing this year is not going to have any impact on the election. voters beware. -->
+        <p>Experts say it’s too little too late to change the landscape of the 2024 election and artificial intelligence technology will only get more sophisticated.</p>
 
-        <!-- campaigns  -->
+        <p>“It's scary that you can put words in the mouth of a person and make people believe it,” said Muller. “It is really a whole new ball game.”</p>
 
     </div>
-    
 
     <div class="footer">
         <p>View Project on <a href="https://github.com/katrventura/ai-elections">GitHub</a></p>
@@ -792,7 +891,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr('width', '100%')
                         .attr('patternContentUnits', 'objectBoundingBox')
                         .append('image')
-                        .attr('href', 'tiktok.png')
+                        .attr('href', 'tiktok-green.png')
                         .attr('width', 1)
                         .attr('height', 1)
                         .attr('preserveAspectRatio', 'none'),
